@@ -31,7 +31,7 @@ class Config
     // ------------------------------------------------------------------------
 
     const BASE_URL = 'http://localhost';
-    const LANGUAGE = 'portuguese';
+    const LANGUAGE = 'portuguese-br';
     const DEBUG_MODE = false;
     const TIMEZONE = 'America/Sao_Paulo'; // Set the default timezone   
     const DATE_FORMAT = 'dd/mm/YYYY'; // Set the date format (d/m/Y, m/d/Y, Y-m-d)
