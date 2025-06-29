@@ -55,4 +55,4 @@ $lang['ut_array'] = 'Array';
 $lang['ut_object'] = 'Object';
 $lang['ut_resource'] = 'Resource';
 $lang['ut_null'] = 'Null';
-$lang['ut_notes'] = 'Notes';
+$lang['ut_notes'] = 'Observações';
