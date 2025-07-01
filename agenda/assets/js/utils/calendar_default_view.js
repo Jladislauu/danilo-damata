@@ -1484,6 +1484,7 @@ App.Utils.CalendarDefaultView = (function () {
         const firstWeekday = vars('first_weekday');
         const firstWeekdayNumber = App.Utils.Date.getWeekdayId(firstWeekday);
 
+        console.log('FullCalendar locale:', vars('language_code'));
         // Initialize page calendar
         fullCalendar = new FullCalendar.Calendar($calendar[0], {
             initialView,
