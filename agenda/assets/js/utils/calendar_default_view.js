@@ -1489,6 +1489,11 @@ App.Utils.CalendarDefaultView = (function () {
         fullCalendar = new FullCalendar.Calendar($calendar[0], {
             initialView,
             locale: 'pt-br',
+            // Adicione esta linha para traduzir os dias da semana:
+            dayHeaderContent: function(arg) {
+                const dias = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+                return dias[arg.date.getDay()];
+            },
             nowIndicator: true,
             height: getCalendarHeight(),
             editable: true,
