@@ -1,226 +1,94 @@
-(function($) {
-
-	"use strict";
-
-	$(window).stellar({
-    responsive: true,
-    parallaxBackgrounds: true,
-    parallaxElements: true,
-    horizontalScrolling: false,
-    hideDistantElements: false,
-    scrollProperty: 'scroll'
-  });
-
-
-	var fullHeight = function() {
-
-		$('.js-fullheight').css('height', $(window).height());
-		$(window).resize(function(){
-			$('.js-fullheight').css('height', $(window).height());
-		});
-
-	};
-	fullHeight();
-
-	// loader
-	var loader = function() {
-		setTimeout(function() { 
-			if($('#ftco-loader').length > 0) {
-				$('#ftco-loader').removeClass('show');
-			}
-		}, 1);
-	};
-	loader();
-
-	var carousel = function() {
-		$('.carousel-testimony').owlCarousel({
-			center: true,
-			loop: true,
-			autoplay: true,
-			autoplaySpeed:2000,
-			items:1,
-			margin: 30,
-			stagePadding: 0,
-			nav: false,
-			navText: ['<span class="ion-ios-arrow-back">', '<span class="ion-ios-arrow-forward">'],
-			responsive:{
-				0:{
-					items: 1
-				},
-				600:{
-					items: 2
-				},
-				1000:{
-					items: 3
-				}
-			}
-		});
-
-	};
-	carousel();
-
-	$('nav .dropdown').hover(function(){
-		var $this = $(this);
-		// 	 timer;
-		// clearTimeout(timer);
-		$this.addClass('show');
-		$this.find('> a').attr('aria-expanded', true);
-		// $this.find('.dropdown-menu').addClass('animated-fast fadeInUp show');
-		$this.find('.dropdown-menu').addClass('show');
-	}, function(){
-		var $this = $(this);
-			// timer;
-		// timer = setTimeout(function(){
-			$this.removeClass('show');
-			$this.find('> a').attr('aria-expanded', false);
-			// $this.find('.dropdown-menu').removeClass('animated-fast fadeInUp show');
-			$this.find('.dropdown-menu').removeClass('show');
-		// }, 100);
-	});
-
-
-	$('#dropdown04').on('show.bs.dropdown', function () {
-	  console.log('show');
-	});
-
-	// scroll
-	var scrollWindow = function() {
-		$(window).scroll(function(){
-			var $w = $(this),
-					st = $w.scrollTop(),
-					navbar = $('.ftco_navbar'),
-					sd = $('.js-scroll-wrap');
-
-			if (st > 150) {
-				if ( !navbar.hasClass('scrolled') ) {
-					navbar.addClass('scrolled');	
-				}
-			} 
-			if (st < 150) {
-				if ( navbar.hasClass('scrolled') ) {
-					navbar.removeClass('scrolled sleep');
-				}
-			} 
-			if ( st > 350 ) {
-				if ( !navbar.hasClass('awake') ) {
-					navbar.addClass('awake');	
-				}
-				
-				if(sd.length > 0) {
-					sd.addClass('sleep');
-				}
-			}
-			if ( st < 350 ) {
-				if ( navbar.hasClass('awake') ) {
-					navbar.removeClass('awake');
-					navbar.addClass('sleep');
-				}
-				if(sd.length > 0) {
-					sd.removeClass('sleep');
-				}
-			}
-		});
-	};
-	scrollWindow();
-
-	var counter = function() {
-		
-		$('#section-counter, .hero-wrap, .ftco-counter').waypoint( function( direction ) {
-
-			if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
-
-				var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',')
-				$('.number').each(function(){
-					var $this = $(this),
-						num = $this.data('number');
-						console.log(num);
-					$this.animateNumber(
-					  {
-					    number: num,
-					    numberStep: comma_separator_number_step
-					  }, 7000
-					);
-				});
-				
-			}
-
-		} , { offset: '95%' } );
-
-	}
-	counter();
-
-
-	var contentWayPoint = function() {
-		var i = 0;
-		$('.ftco-animate').waypoint( function( direction ) {
-
-			if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
-				
-				i++;
-
-				$(this.element).addClass('item-animate');
-				setTimeout(function(){
-
-					$('body .ftco-animate.item-animate').each(function(k){
-						var el = $(this);
-						setTimeout( function () {
-							var effect = el.data('animate-effect');
-							if ( effect === 'fadeIn') {
-								el.addClass('fadeIn ftco-animated');
-							} else if ( effect === 'fadeInLeft') {
-								el.addClass('fadeInLeft ftco-animated');
-							} else if ( effect === 'fadeInRight') {
-								el.addClass('fadeInRight ftco-animated');
-							} else {
-								el.addClass('fadeInUp ftco-animated');
-							}
-							el.removeClass('item-animate');
-						},  k * 50, 'easeInOutExpo' );
-					});
-					
-				}, 100);
-				
-			}
-
-		} , { offset: '95%' } );
-	};
-	contentWayPoint();
-
-
-	
-	// magnific popup
-	$('.image-popup').magnificPopup({
-    type: 'image',
-    closeOnContentClick: true,
-    closeBtnInside: false,
-    fixedContentPos: true,
-    mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
-     gallery: {
-      enabled: true,
-      navigateByImgClick: true,
-      preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-    },
-    image: {
-      verticalFit: true
-    },
-    zoom: {
-      enabled: true,
-      duration: 300 // don't foget to change the duration also in CSS
+(function () {
+  if (!window.location.hash) return;
+  var fixAnchor = function () {
+    var target = document.querySelector(window.location.hash);
+    if (target) target.scrollIntoView({ behavior: "auto", block: "start" });
+  };
+  window.addEventListener("load", function () {
+    fixAnchor();
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(fixAnchor);
     }
+    setTimeout(fixAnchor, 400);
   });
+})();
 
-  $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
-    disableOn: 700,
-    type: 'iframe',
-    mainClass: 'mfp-fade',
-    removalDelay: 160,
-    preloader: false,
+document.addEventListener("DOMContentLoaded", function () {
+  var skipLink = document.querySelector(".skip-link");
+  if (skipLink) {
+    skipLink.addEventListener("click", function (e) {
+      var target = document.querySelector(skipLink.getAttribute("href"));
+      if (target) {
+        e.preventDefault();
+        target.focus();
+      }
+    });
+  }
 
-    fixedContentPos: false
-  });
+  var heroHeader = document.querySelector(".site-header--hero");
+  if (heroHeader) {
+    var revealHeader = function () {
+      var scrolled = window.scrollY > 60;
+      heroHeader.classList.toggle("visible", scrolled);
+      document.body.classList.toggle("hero-scrolled", scrolled);
+    };
+    window.addEventListener("scroll", revealHeader, { passive: true });
+    revealHeader();
+  }
 
-  $('[data-toggle="popover"]').popover()
-	$('[data-toggle="tooltip"]').tooltip()
+  var toggle = document.querySelector(".nav-toggle");
+  var links = document.querySelector(".nav-links");
+  if (toggle && links) {
+    var setNavOpen = function (open) {
+      links.classList.toggle("open", open);
+      toggle.classList.toggle("open", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+      document.body.classList.toggle("nav-locked", open);
+    };
+    toggle.addEventListener("click", function () {
+      setNavOpen(!links.classList.contains("open"));
+    });
+    links.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () { setNavOpen(false); });
+    });
+  }
 
-})(jQuery);
+  var track = document.querySelector(".t-track");
+  var prev = document.querySelector(".t-prev");
+  var next = document.querySelector(".t-next");
+  if (track && prev && next) {
+    var scrollAmount = function () {
+      var card = track.querySelector(".t-card");
+      return card ? card.getBoundingClientRect().width + 24 : 360;
+    };
+    prev.addEventListener("click", function () {
+      track.scrollBy({ left: -scrollAmount(), behavior: "smooth" });
+    });
+    next.addEventListener("click", function () {
+      track.scrollBy({ left: scrollAmount(), behavior: "smooth" });
+    });
+  }
 
+  var form = document.getElementById("contact-form");
+  var messageDiv = document.getElementById("form-message");
+  if (form && messageDiv) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var formData = new FormData(form);
+      messageDiv.style.color = "";
+      messageDiv.textContent = "Enviando...";
+      fetch("php/send-email.php", { method: "POST", body: formData })
+        .then(function (response) { return response.text(); })
+        .then(function (text) {
+          messageDiv.style.color = "#2f7d5c";
+          messageDiv.textContent = text || "Mensagem enviada com sucesso!";
+          form.reset();
+        })
+        .catch(function () {
+          messageDiv.style.color = "#b3402f";
+          messageDiv.textContent = "Erro ao enviar a mensagem. Tente novamente ou fale no WhatsApp.";
+        });
+    });
+  }
+});
