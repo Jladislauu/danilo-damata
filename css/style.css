@@ -34,9 +34,6 @@ textarea:focus-visible {
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
-  /* Rede de segurança: nunca permitir scroll lateral (clip não quebra o header sticky) */
-  overflow-x: hidden;
-  overflow-x: clip;
 }
 
 body {
@@ -174,15 +171,6 @@ section {
 
 .btn-block { width: 100%; }
 
-/* Em telas estreitas, botões com texto longo quebram linha em vez de estourar a largura */
-@media (max-width: 560px) {
-  .btn {
-    white-space: normal;
-    max-width: 100%;
-    text-align: center;
-  }
-}
-
 /* ============ Skip link / mini brand mark ============ */
 .skip-link {
   position: absolute;
@@ -270,8 +258,7 @@ body.hero-scrolled .brand-mark-mini { opacity: 0; pointer-events: none; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 14px;
-  padding-bottom: 14px;
+  padding: 14px 0;
 }
 
 .brand {
@@ -371,27 +358,6 @@ body.nav-locked { overflow: hidden; }
   .nav-links a { width: 100%; padding: 10px 0; }
   .nav-toggle { display: flex; }
   .nav-cta .btn span { display: none; }
-
-  /* Home: no mobile o header fica sempre visível (o menu mora nele) */
-  .site-header--hero {
-    opacity: 1;
-    pointer-events: auto;
-    transform: none;
-    background: rgba(58, 40, 24, 0.82);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  .site-header--hero .brand,
-  .site-header--hero .nav-links a { color: rgba(255, 255, 255, 0.92); }
-  .site-header--hero .nav-links a:hover,
-  .site-header--hero .nav-links a.active { color: var(--brand-sand); }
-  .site-header--hero .nav-toggle-bar { background: rgba(255, 255, 255, 0.92); }
-  .site-header--hero .nav-links {
-    background: rgb(58, 40, 24);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-  }
-  .brand-mark-mini { display: none; }
 }
 
 /* ============ Hero ============ */
@@ -685,13 +651,6 @@ body.nav-locked { overflow: hidden; }
   color: var(--ink-soft);
 }
 
-@media (max-width: 400px) {
-  .mini-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .mini-stat { padding: 14px 12px; }
-  .mini-stat .num { font-size: 1.1rem; }
-  .mini-stat .num, .mini-stat .label { overflow-wrap: break-word; hyphens: auto; }
-}
-
 /* ============ Two column / about ============ */
 .split {
   display: grid;
@@ -715,7 +674,6 @@ body.nav-locked { overflow: hidden; }
 
 @media (max-width: 860px) {
   .split { grid-template-columns: 1fr; gap: 36px; }
-  .split > * { min-width: 0; }
   .split.reverse .split-media,
   .split.reverse .split-text { order: initial; }
 }
@@ -1165,9 +1123,7 @@ body.nav-locked { overflow: hidden; }
 
 .info-card span { display: block; font-size: 0.8rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.06em; }
 
-.info-card > div { min-width: 0; }
-
-.info-card strong, .info-card a { font-size: 1rem; overflow-wrap: anywhere; }
+.info-card strong, .info-card a { font-size: 1rem; }
 
 .form-group { margin-bottom: 18px; }
 
@@ -1211,7 +1167,6 @@ textarea.form-control { resize: vertical; min-height: 120px; }
 
 @media (max-width: 860px) {
   .contact-grid { grid-template-columns: 1fr; }
-  .contact-grid > * { min-width: 0; }
 }
 
 /* ============ Footer ============ */
