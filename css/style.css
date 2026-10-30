@@ -358,6 +358,27 @@ body.nav-locked { overflow: hidden; }
   .nav-links a { width: 100%; padding: 10px 0; }
   .nav-toggle { display: flex; }
   .nav-cta .btn span { display: none; }
+
+  /* Home: no mobile o header fica sempre visível (o menu mora nele) */
+  .site-header--hero {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    background: rgba(58, 40, 24, 0.82);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .site-header--hero .brand,
+  .site-header--hero .nav-links a { color: rgba(255, 255, 255, 0.92); }
+  .site-header--hero .nav-links a:hover,
+  .site-header--hero .nav-links a.active { color: var(--brand-sand); }
+  .site-header--hero .nav-toggle-bar { background: rgba(255, 255, 255, 0.92); }
+  .site-header--hero .nav-links {
+    background: rgb(58, 40, 24);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+  .brand-mark-mini { display: none; }
 }
 
 /* ============ Hero ============ */
